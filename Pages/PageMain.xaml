@@ -1,0 +1,212 @@
+﻿<Page x:Class="CustomCodeSystem.Pages.PageMain"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:CustomCodeSystem.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="PageMain"
+      Background="#F6F7FB">
+
+    <Page.Resources>
+
+        <!-- Page container -->
+        <Style x:Key="PageContainer" TargetType="Grid">
+            <Setter Property="Margin" Value="18"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+            <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+            <Setter Property="TextOptions.TextHintingMode" Value="Fixed"/>
+            <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled"/>
+        </Style>
+
+        <!-- Global: crisp text -->
+        <Style TargetType="TextBlock">
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+            <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+            <Setter Property="TextOptions.TextHintingMode" Value="Fixed"/>
+            <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <!-- Card Button (shadow underlay + surface overlay, no effect on text) -->
+        <Style x:Key="CardActionButton" TargetType="Button">
+            <Setter Property="Height" Value="92"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="Padding" Value="16,12"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="Background" Value="#FFFFFFFF"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid SnapsToDevicePixels="True" UseLayoutRounding="True">
+
+                            <!-- shadow layer (no text here) -->
+                            <Border x:Name="shadow"
+                                    CornerRadius="14"
+                                    Background="#FFFFFF"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="1"
+                                    IsHitTestVisible="False">
+                                <Border.Effect>
+                                    <!-- умеренная тень: без фанатизма -->
+                                    <DropShadowEffect BlurRadius="12"
+                                                      ShadowDepth="2"
+                                                      Opacity="0.14"/>
+                                </Border.Effect>
+                            </Border>
+
+                            <!-- surface layer (contains content, NO effects) -->
+                            <Border x:Name="bd"
+                                    Padding="20"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="14"
+                                    SnapsToDevicePixels="True">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="#9CA3AF"/>
+                                <!-- легкий ховер, не влияющий на текст -->
+                                <Setter TargetName="bd" Property="Background" Value="#FAFAFB"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#F3F4F6"/>
+                                <Setter TargetName="shadow" Property="Opacity" Value="0.85"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="bd" Property="Opacity" Value="0.60"/>
+                                <Setter TargetName="shadow" Property="Opacity" Value="0.40"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Headings -->
+        <Style x:Key="ActionTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Style="{StaticResource PageContainer}">
+
+        <!-- Actions -->
+        <StackPanel VerticalAlignment="Top" MaxWidth="720">
+
+            <!-- 1 -->
+            <Button x:Name="btnConvertSnList"
+                    Style="{StaticResource CardActionButton}"
+                    Click="btnConvertSnList_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock Style="{StaticResource ActionTitle}"
+                                Text="Surišti IMEI ir ThirdPartySn"/>
+
+                    <TextBlock Grid.Column="1"
+                               Text="›"
+                               FontSize="28"
+                               Margin="16,0,2,0"
+                               Foreground="#6B7280"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Button>
+
+            <!-- 2 -->
+            <Button x:Name="btnLinkSn"
+                    Style="{StaticResource CardActionButton}"
+                    Click="btnLinkSn_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Style="{StaticResource ActionTitle}"
+                                   Text="Pririšti IMEI prie gaminio"/>
+
+                    <TextBlock Grid.Column="1"
+                               Text="›"
+                               FontSize="28"
+                               Margin="16,0,2,0"
+                               Foreground="#6B7280"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Button>
+
+            <!-- 3 -->
+            <Button x:Name="btnWriteAction"
+                    Style="{StaticResource CardActionButton}"
+                    Click="btnWriteAction_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Style="{StaticResource ActionTitle}"
+                                Text="Operacijos skenuojant IMEI"/>
+
+                    <TextBlock Grid.Column="1"
+                               Text="›"
+                               FontSize="28"
+                               Margin="16,0,2,0"
+                               Foreground="#6B7280"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Button>
+
+            <Button x:Name="btnSearchAction"
+                    Style="{StaticResource CardActionButton}"
+                    Click="btnSearchAction_Click">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Style="{StaticResource ActionTitle}"
+                                Text="Operaciju istorija pagal IMEI"/>
+
+                    <TextBlock Grid.Column="1"
+                               Text="›"
+                               FontSize="28"
+                               Margin="16,0,2,0"
+                               Foreground="#6B7280"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</Page>
