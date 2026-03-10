@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:CustomCodeSystem.Pages"
       mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="1000"
+      d:DesignHeight="650" d:DesignWidth="1000"
       Title="PageSearchActions"
       Background="#F6F7FB">
 
@@ -20,7 +20,7 @@
             <Setter Property="SnapsToDevicePixels" Value="True"/>
         </Style>
 
-        <!-- Card: shadow + surface (no blur on content) -->
+        <!-- Card: shadow + surface -->
         <Style x:Key="CardShadowStyle" TargetType="Border">
             <Setter Property="Background" Value="#FFFFFFFF"/>
             <Setter Property="CornerRadius" Value="14"/>
@@ -48,27 +48,27 @@
         <Style x:Key="SectionTitle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="Foreground" Value="#111827"/>
             <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
 
         <Style x:Key="LabelText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="Foreground" Value="#111827"/>
             <Setter Property="Margin" Value="0,0,0,6"/>
         </Style>
 
         <Style x:Key="HintText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="Foreground" Value="#111827"/>
             <Setter Property="Opacity" Value="0.70"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
 
-        <!-- TextBox: shadow underlay + chrome overlay -->
+        <!-- TextBox -->
         <Style x:Key="ReadableTextBox" TargetType="TextBox">
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="Foreground" Value="#111827"/>
             <Setter Property="Background" Value="#FFFFFF"/>
             <Setter Property="BorderBrush" Value="#D1D5DB"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -126,10 +126,9 @@
             </Setter>
         </Style>
 
-        <!-- DatePicker: make it look like TextBox (re-using ReadableTextBox) -->
-        <!-- DatePicker: looks like TextBox + opens calendar -->
+        <!-- DatePicker -->
         <Style x:Key="ReadableDatePicker" TargetType="DatePicker">
-            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="Foreground" Value="#111827"/>
             <Setter Property="Height" Value="34"/>
             <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -143,44 +142,41 @@
                                 <ColumnDefinition Width="34"/>
                             </Grid.ColumnDefinitions>
 
-                            <!-- Text part -->
                             <DatePickerTextBox x:Name="PART_TextBox"
-                                       Grid.Column="0"
-                                       Style="{StaticResource ReadableTextBox}"
-                                       Height="34"
-                                       VerticalContentAlignment="Center"/>
+                   Grid.Column="0"
+                   Style="{DynamicResource ReadableTextBox}"
+                   Height="34"
+                   VerticalContentAlignment="Center"/>
 
-                            <!-- Drop-down button MUST be ToggleButton named PART_Button -->
                             <ToggleButton x:Name="PART_Button"
-                                  Grid.Column="1"
-                                  Focusable="False"
-                                  IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                  Background="#F3F4F6"
-                                  BorderBrush="#D1D5DB"
-                                  BorderThickness="1"
-                                  Cursor="Hand">
+                                          Grid.Column="1"
+                                          Focusable="False"
+                                          IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                          Background="#F3F4F6"
+                                          BorderBrush="#D1D5DB"
+                                          BorderThickness="1"
+                                          Cursor="Hand">
                                 <TextBlock Text="📅"
-                                   FontSize="14"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                                           FontSize="14"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
                             </ToggleButton>
 
-                            <!-- Popup + Calendar (this is what you were missing) -->
                             <Popup x:Name="PART_Popup"
-                           Placement="Bottom"
-                           AllowsTransparency="True"
-                           Focusable="False"
-                           StaysOpen="False"
-                           IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}">
+                                   Placement="Bottom"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   StaysOpen="False"
+                                   IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}">
                                 <Border Background="White"
-                                BorderBrush="#D1D5DB"
-                                BorderThickness="1"
-                                CornerRadius="10"
-                                Padding="6">
+                                        BorderBrush="#D1D5DB"
+                                        BorderThickness="1"
+                                        CornerRadius="10"
+                                        Padding="6">
                                     <Calendar x:Name="PART_Calendar"
-                                      IsTodayHighlighted="True"
-                                      SelectedDate="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                      DisplayDate="{Binding DisplayDate, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+                                              IsTodayHighlighted="True"
+                                              SelectedDate="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              DisplayDate="{Binding DisplayDate, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
                                 </Border>
                             </Popup>
                         </Grid>
@@ -195,7 +191,7 @@
             <Setter Property="Padding" Value="14,7"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="Foreground" Value="#111827"/>
             <Setter Property="Background" Value="#F3F4F6"/>
             <Setter Property="BorderBrush" Value="#D1D5DB"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -251,48 +247,6 @@
             <Setter Property="Background" Value="#111827"/>
             <Setter Property="BorderBrush" Value="#111827"/>
             <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid SnapsToDevicePixels="True" UseLayoutRounding="True">
-                            <Border x:Name="shadow"
-                                    CornerRadius="10"
-                                    Background="#FFFFFF"
-                                    BorderBrush="Transparent"
-                                    BorderThickness="1"
-                                    IsHitTestVisible="False">
-                                <Border.Effect>
-                                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.16"/>
-                                </Border.Effect>
-                            </Border>
-
-                            <Border x:Name="bd"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="10"
-                                    SnapsToDevicePixels="True">
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-                        </Grid>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bd" Property="Opacity" Value="0.92"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="bd" Property="Opacity" Value="0.85"/>
-                                <Setter TargetName="shadow" Property="Opacity" Value="0.85"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="bd" Property="Opacity" Value="0.55"/>
-                                <Setter TargetName="shadow" Property="Opacity" Value="0.45"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
         </Style>
 
         <!-- DataGrid -->
@@ -309,11 +263,13 @@
             <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="EnableRowVirtualization" Value="True"/>
             <Setter Property="EnableColumnVirtualization" Value="True"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         </Style>
 
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="#F9FAFB"/>
-            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="Foreground" Value="#111827"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Height" Value="34"/>
             <Setter Property="BorderBrush" Value="#E5E7EB"/>
@@ -322,7 +278,7 @@
         </Style>
 
         <Style TargetType="DataGridCell">
-            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="Foreground" Value="#111827"/>
             <Setter Property="Padding" Value="10,6"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
@@ -341,6 +297,12 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <!-- TabControl a bit cleaner -->
+        <Style TargetType="TabControl">
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         <local:InverseBoolConverter x:Key="InvBool"/>
 
@@ -348,52 +310,54 @@
 
     <Grid Margin="18"
           UseLayoutRounding="True"
-          SnapsToDevicePixels="True"
-          TextOptions.TextFormattingMode="Display"
-          TextOptions.TextRenderingMode="ClearType"
-          TextOptions.TextHintingMode="Fixed"
-          RenderOptions.ClearTypeHint="Enabled">
+          SnapsToDevicePixels="True">
+
+        <!-- disable main content while loading -->
         <Grid IsEnabled="{Binding IsLoading, Converter={StaticResource InvBool}}">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <!-- 50/50 split: top = filters+stats, bottom = results -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <!-- FILTERS CARD -->
-        <Grid Grid.Row="0" Margin="0,0,0,12" SnapsToDevicePixels="True" UseLayoutRounding="True">
-            <Border Style="{StaticResource CardShadowStyle}"/>
-            <Border Style="{StaticResource CardSurfaceStyle}" Margin="0">
+            <!-- TOP HALF -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.35*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="1.65*"/>
+                </Grid.ColumnDefinitions>
 
-                <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitle}" Text="Paieška"/>
-
-                    <!-- 2 columns form -->
+                <!-- FILTERS CARD (left) -->
+                <Grid Grid.Column="0">
+                    <Border Style="{StaticResource CardShadowStyle}"/>
+                    <Border Style="{StaticResource CardSurfaceStyle}">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="0">
+                            <TextBlock Grid.Row="0" Style="{StaticResource SectionTitle}" Text="Paieška"/>
+
+                            <!-- form grid -->
+                            <Grid Grid.Row="1" Margin="0,0,0,6">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-
-                                    <ColumnDefinition Width="*"/>
-
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
                                 <!-- Date From -->
-                                <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,0,12,10">
+                                <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,0,10,10">
                                     <TextBlock Style="{StaticResource LabelText}" Text="Date from"/>
                                     <DatePicker x:Name="datePickerDateFrom"
                                                 Style="{StaticResource ReadableDatePicker}"
@@ -402,7 +366,7 @@
                                 </StackPanel>
 
                                 <!-- Date To -->
-                                <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,0,12,10">
+                                <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,0,0,10">
                                     <TextBlock Style="{StaticResource LabelText}" Text="Date to"/>
                                     <DatePicker x:Name="datePickerDateTo"
                                                 Style="{StaticResource ReadableDatePicker}"
@@ -410,114 +374,289 @@
                                                 SelectedDateFormat="Short"/>
                                 </StackPanel>
 
-
-                                <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,0,12,10">
+                                <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,0,10,10">
                                     <TextBlock Style="{StaticResource LabelText}" Text="Operational/CustomSn"/>
                                     <TextBox x:Name="textBoxOperationalCustomSn" Style="{StaticResource ReadableTextBox}"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,0,12,10">
+                                <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,0,0,10">
                                     <TextBlock Style="{StaticResource LabelText}" Text="Operation"/>
                                     <TextBox x:Name="textBoxOperation" Style="{StaticResource ReadableTextBox}"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="2" Grid.Row="0" Margin="0,0,12,10">
+                                <StackPanel Grid.Column="0" Grid.Row="2" Margin="0,0,10,10">
                                     <TextBlock Style="{StaticResource LabelText}" Text="Worker ID"/>
                                     <TextBox x:Name="textBoxWorkerId" Style="{StaticResource ReadableTextBox}"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,0,12,10">
+                                <StackPanel Grid.Column="1" Grid.Row="2" Margin="0,0,0,10">
                                     <TextBlock Style="{StaticResource LabelText}" Text="Worker name"/>
                                     <TextBox x:Name="textBoxWorkerName" Style="{StaticResource ReadableTextBox}"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="3" Grid.Row="0" Margin="0,0,12,0">
+                                <StackPanel Grid.Column="0" Grid.Row="3" Margin="0,0,10,0">
                                     <TextBlock Style="{StaticResource LabelText}" Text="Worker surname"/>
                                     <TextBox x:Name="textBoWorkerSurname" Style="{StaticResource ReadableTextBox}"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="5" Grid.Row="0" Margin="0,0,12,10" VerticalAlignment="Bottom">
+                                <!-- buttons row (right aligned) -->
+                                <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,6,0,0">
+                                    <Button x:Name="btnClear"
+                                            Content="Isvalyti"
+                                            MinWidth="120"
+                                            Click="btnClear_Click"
+                                            Style="{StaticResource ReadableButton}"
+                                            Margin="0,0,10,0"/>
                                     <Button x:Name="btnSearch"
                                             Content="Ieškoti"
-                                            MinWidth="140"
+                                            MinWidth="120"
                                             Click="btnSearch_Click"
                                             Style="{StaticResource PrimaryButton}"/>
                                 </StackPanel>
-
-                                <StackPanel Grid.Column="5" Grid.Row="1" Margin="0,0,12,10" VerticalAlignment="Bottom">
-                                    <Button x:Name="btnClear"
-                                            Content="Isvalyti"
-                                            MinWidth="140"
-                                            Click="btnClear_Click"
-                                            Style="{StaticResource PrimaryButton}"/>
-                                </StackPanel>
-
                             </Grid>
-                            <Grid x:Name="gridInfo" Grid.Row="1" Visibility="Collapsed">
-                                <TextBlock x:Name="textBlockInfo" Foreground="Red" FontSize="20" TextAlignment="Center"/>
+
+                            <!-- info / errors -->
+                            <Grid x:Name="gridInfo" Grid.Row="2" Visibility="Collapsed" Margin="0,8,0,0">
+                                <Border Background="#FEF2F2" BorderBrush="#FCA5A5" BorderThickness="1" CornerRadius="10" Padding="10">
+                                    <TextBlock x:Name="textBlockInfo" Foreground="#B91C1C" FontSize="14" TextAlignment="Left" TextWrapping="Wrap"/>
+                                </Border>
                             </Grid>
+
                         </Grid>
-                    </StackPanel>
+                    </Border>
+                </Grid>
 
-            </Border>
-        </Grid>
+                <!-- splitter -->
+                <GridSplitter Grid.Column="1"
+                              Width="12"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Background="Transparent"
+                              ShowsPreview="True"/>
 
-        <!-- RESULTS CARD -->
-        <Grid Grid.Row="1" SnapsToDevicePixels="True" UseLayoutRounding="True">
-            <Border Style="{StaticResource CardShadowStyle}"/>
-            <Border Style="{StaticResource CardSurfaceStyle}" Margin="0" Padding="0">
+                <!-- STATS CARD (right) -->
+                <Grid Grid.Column="2">
+                    <Border Style="{StaticResource CardShadowStyle}"/>
+                    <Border Style="{StaticResource CardSurfaceStyle}" Padding="14,12">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                <DataGrid x:Name="dgCompletedActions"
+                            <TextBlock Grid.Row="0" Style="{StaticResource SectionTitle}" Text="Statistika"/>
 
-                          Style="{StaticResource ReadableDataGrid}"
-                          ItemsSource="{Binding CompletedActions}"
-                          Margin="0">
+                            <!-- quick metrics (wrap, but stays in top area) -->
+                            <WrapPanel Grid.Row="1" Margin="0,0,0,8">
+                                <Border Background="#F9FAFB" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="10" Padding="10" Margin="0,0,10,10">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource HintText}" Text="Rows"/>
+                                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding TotalRows}"/>
+                                    </StackPanel>
+                                </Border>
 
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Time" Binding="{Binding ConnectDateTime, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" Width="160"/>
-                            <DataGridTextColumn Header="WorkerId" Binding="{Binding WorkerId}" Width="120"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding WorkerName}" Width="120"/>
-                            <DataGridTextColumn Header="Surname" Binding="{Binding WorkerSurname}" Width="120"/>
-                            <DataGridTextColumn Header="Operation" Binding="{Binding OperationCode}" Width="90"/>
-                            <DataGridTextColumn Header="Description" Binding="{Binding OperationDescription}" Width="220"/>
-                            <DataGridTextColumn Header="Operational" Binding="{Binding OperationalNumber}" Width="140"/>
-                            <DataGridTextColumn Header="Serial" Binding="{Binding SerialNumber}" Width="140"/>
-                            <DataGridTextColumn Header="IMEI" Binding="{Binding Imei}" Width="140"/>
-                            <DataGridCheckBoxColumn Header="Pass" Binding="{Binding Pass}" Width="60"/>
-                            <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
-                        </DataGrid.Columns>
+                                <Border Background="#F9FAFB" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="10" Padding="10" Margin="0,0,10,10">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource HintText}" Text="Unique OperationalNumber"/>
+                                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding UniqueOperationalNumbers}"/>
+                                    </StackPanel>
+                                </Border>
 
-                    </DataGrid>
+                                <Border Background="#F9FAFB" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="10" Padding="10" Margin="0,0,10,10">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource HintText}" Text="Unique OperationCode"/>
+                                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding UniqueOperationCodes}"/>
+                                    </StackPanel>
+                                </Border>
 
+                                <Border Background="#F9FAFB" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="10" Padding="10" Margin="0,0,10,10">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource HintText}" Text="Unique Workers"/>
+                                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding UniqueWorkers}"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Background="#F9FAFB" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="10" Padding="10" Margin="0,0,10,10">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource HintText}" Text="Pass rate"/>
+                                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding PassRateText}"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Background="#F9FAFB" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="10" Padding="10" Margin="0,0,10,10" MinWidth="170">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource HintText}" Text="Time span"/>
+                                        <TextBlock FontSize="13" FontWeight="SemiBold" Text="{Binding TimeSpanText}" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </Border>
+                            </WrapPanel>
+
+                            <Border Grid.Row="2"
+        Background="#FFFFFF"
+        BorderBrush="#E5E7EB"
+        BorderThickness="1"
+        CornerRadius="10"
+        Padding="6">
+
+                                <!-- ВАЖНО: TabControl сам занимает доступную высоту,
+         а внутри DataGrid скроллится сам (без внешних ScrollViewer) -->
+                                <TabControl
+        HorizontalContentAlignment="Stretch"
+        VerticalContentAlignment="Stretch">
+
+                                    <TabItem Header="By OperationCode">
+                                        <Grid>
+                                            <DataGrid Style="{StaticResource ReadableDataGrid}"
+                          ItemsSource="{Binding OperationCodeStats}"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="OperationCode" Binding="{Binding OperationCode}" Width="140"/>
+                                                    <DataGridTextColumn Header="Rows" Binding="{Binding Count}" Width="80"/>
+                                                    <DataGridTextColumn Header="Unique Operational" Binding="{Binding UniqueOperational}" Width="140"/>
+                                                    <DataGridTextColumn Header="Pass" Binding="{Binding PassCount}" Width="80"/>
+                                                    <DataGridTextColumn Header="Fail" Binding="{Binding FailCount}" Width="80"/>
+                                                    <DataGridTextColumn Header="PassRate" Binding="{Binding PassRateText}" Width="100"/>
+                                                    <DataGridTextColumn Header="Top Operational (sample)" Binding="{Binding TopOperationalSample}" Width="*"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+
+                                    <TabItem Header="By Worker">
+                                        <Grid>
+                                            <DataGrid Style="{StaticResource ReadableDataGrid}"
+                          ItemsSource="{Binding WorkerStats}"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="WorkerId" Binding="{Binding WorkerId}" Width="120"/>
+                                                    <DataGridTextColumn Header="Name" Binding="{Binding WorkerName}" Width="140"/>
+                                                    <DataGridTextColumn Header="Surname" Binding="{Binding WorkerSurname}" Width="140"/>
+                                                    <DataGridTextColumn Header="Rows" Binding="{Binding Count}" Width="80"/>
+                                                    <DataGridTextColumn Header="Unique OperationCode" Binding="{Binding UniqueOperationCodes}" Width="160"/>
+                                                    <DataGridTextColumn Header="Unique Operational" Binding="{Binding UniqueOperational}" Width="140"/>
+                                                    <DataGridTextColumn Header="PassRate" Binding="{Binding PassRateText}" Width="100"/>
+                                                    <!--<DataGridTextColumn Header="Top OperationCode" Binding="{Binding TopOperationCode}" Width="140"/>-->
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+
+                                    <TabItem Header="By Day">
+                                        <Grid>
+                                            <DataGrid Style="{StaticResource ReadableDataGrid}"
+                          ItemsSource="{Binding DayStats}"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat={}{0:yyyy-MM-dd}}" Width="140"/>
+                                                    <DataGridTextColumn Header="Rows" Binding="{Binding Count}" Width="100"/>
+                                                    <DataGridTextColumn Header="Unique Workers" Binding="{Binding UniqueWorkers}" Width="140"/>
+                                                    <DataGridTextColumn Header="Unique Operational" Binding="{Binding UniqueOperational}" Width="160"/>
+                                                    <DataGridTextColumn Header="PassRate" Binding="{Binding PassRateText}" Width="120"/>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </TabItem>
+
+                                    <TabItem Header="Other">
+                                        <!-- Тут можно ScrollViewer, т.к. это текст, а не DataGrid -->
+                                        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                                            <StackPanel Margin="6">
+                                                <TextBlock Style="{StaticResource HintText}" Text="{Binding ExtraInsights}" />
+                                            </StackPanel>
+                                        </ScrollViewer>
+                                    </TabItem>
+
+                                </TabControl>
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <!-- HORIZONTAL SPLITTER BETWEEN TOP/BOTTOM (optional, nice UX) -->
+            <GridSplitter Grid.Row="1"
+                          Height="12"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Background="Transparent"
+                          ShowsPreview="True"/>
+
+            <!-- BOTTOM HALF: RESULTS -->
+            <Grid Grid.Row="2" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                <Border Style="{StaticResource CardShadowStyle}"/>
+                <Border Style="{StaticResource CardSurfaceStyle}" Margin="0" Padding="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- small header bar -->
+                        <Border Grid.Row="0" Background="#F9FAFB" BorderBrush="#E5E7EB" BorderThickness="0,0,0,1" Padding="12,10">
+                            <DockPanel>
+                                <TextBlock Text="Results" FontWeight="SemiBold" Foreground="#111827" />
+                                <TextBlock DockPanel.Dock="Right" Opacity="0.70" Foreground="#111827"
+                                           Text="{Binding TotalRows, StringFormat=Rows: {0}}"/>
+                            </DockPanel>
+                        </Border>
+
+                        <DataGrid x:Name="dgCompletedActions"
+                                  Grid.Row="1"
+                                  Style="{StaticResource ReadableDataGrid}"
+                                  ItemsSource="{Binding CompletedActions}"
+                                  Margin="0">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Time" Binding="{Binding ConnectDateTime, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" Width="160"/>
+                                <DataGridTextColumn Header="WorkerId" Binding="{Binding WorkerId}" Width="120"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding WorkerName}" Width="120"/>
+                                <DataGridTextColumn Header="Surname" Binding="{Binding WorkerSurname}" Width="120"/>
+                                <DataGridTextColumn Header="Operation" Binding="{Binding OperationCode}" Width="90"/>
+                                <DataGridTextColumn Header="Description" Binding="{Binding OperationDescription}" Width="220"/>
+                                <DataGridTextColumn Header="Operational" Binding="{Binding OperationalNumber}" Width="140"/>
+                                <DataGridTextColumn Header="Serial" Binding="{Binding SerialNumber}" Width="140"/>
+                                <DataGridTextColumn Header="IMEI" Binding="{Binding Imei}" Width="140"/>
+                                <DataGridCheckBoxColumn Header="Pass" Binding="{Binding Pass}" Width="60"/>
+                                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                    </Grid>
                 </Border>
             </Grid>
+
         </Grid>
 
-        <!-- OVERLAY НА ВРЕМЯ ЗАГРУЗКИ -->
-
+        <!-- LOADING OVERLAY -->
         <Grid Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}"
-          IsHitTestVisible="True">
+              IsHitTestVisible="True">
 
             <Border Background="White"
-                CornerRadius="14"
-                Padding="18"
-                Width="320"
-                BorderBrush="Black"
-                  BorderThickness="1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
+                    CornerRadius="14"
+                    Padding="18"
+                    Width="320"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
                 <StackPanel>
                     <TextBlock Text="Loading..."
-                           FontSize="14"
-                           FontWeight="SemiBold"
-                           Margin="0,0,0,10"/>
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,10"/>
 
                     <ProgressBar IsIndeterminate="True" Height="10"/>
 
                     <TextBlock Text="{Binding StatusText}"
-                           Opacity="0.7"
-                           Margin="0,10,0,0"
-                           TextWrapping="Wrap"/>
+                               Opacity="0.7"
+                               Margin="0,10,0,0"
+                               TextWrapping="Wrap"/>
                 </StackPanel>
             </Border>
         </Grid>

@@ -16,7 +16,7 @@ public static class AppState
     private static int _actionTaskId;
     private static string _baseUrl;
     private static string _location;
-    private static string _version = "v1.3";
+    private static string _version = "v1.4";
 
     // SessionId
     public static void SetSession(SessionInfoDto session)

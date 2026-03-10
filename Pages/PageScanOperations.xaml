@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:CustomCodeSystem.Pages"
       mc:Ignorable="d"
-      d:DesignHeight="700" d:DesignWidth="1000"
+      d:DesignHeight="700" d:DesignWidth="1800"
       Title="PageScanOperations"
       Background="#F6F7FB">
 
@@ -316,7 +316,53 @@
             <Setter Property="Foreground" Value="#000000"/>
             <Setter Property="FontSize" Value="13"/>
         </Style>
+        <Style x:Key="FindProductsStatusTextStyle" TargetType="TextBlock">
+            <!-- по умолчанию: ошибка -->
+            <Setter Property="Foreground" Value="#B91C1C"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
 
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding FindProductsStatus}" Value="OK">
+                    <Setter Property="Foreground" Value="#166534"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding FindProductsStatus}" Value="Loading...">
+                    <Setter Property="Foreground" Value="#1D4ED8"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding FindProductsStatus}" Value="Waiting...">
+                    <Setter Property="Foreground" Value="#92400E"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding FindProductsStatus}" Value="Skipped">
+                    <Setter Property="Foreground" Value="#6B7280"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="CreateActionStatusTextStyle" TargetType="TextBlock">
+            <!-- по умолчанию: ошибка -->
+            <Setter Property="Foreground" Value="#B91C1C"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CreateActionStatus}" Value="OK">
+                    <Setter Property="Foreground" Value="#166534"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding CreateActionStatus}" Value="Loading...">
+                    <Setter Property="Foreground" Value="#1D4ED8"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding CreateActionStatus}" Value="Waiting...">
+                    <Setter Property="Foreground" Value="#92400E"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding CreateActionStatus}" Value="Skipped">
+                    <Setter Property="Foreground" Value="#6B7280"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
 
     <Grid Margin="18"
@@ -352,145 +398,155 @@
             </StackPanel>
         </Grid>
 
-        <ScrollViewer x:Name="gridMain"
-                      Grid.Row="1"
-                      VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled">
-            <StackPanel MaxWidth="980">
+        <Grid Grid.Row="1" x:Name="gridMain" Margin="100,0,100,50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                <Grid Margin="0,0,0,12"
-                      SnapsToDevicePixels="True"
-                      UseLayoutRounding="True"
-                      Visibility="Collapsed">
-                    <Border Style="{StaticResource CardShadowStyle}"/>
-                    <Border Style="{StaticResource CardSurfaceStyle}" Margin="0">
-                        <StackPanel x:Name="stackGorCode">
-                            <TextBlock Style="{StaticResource SectionTitle}" Text="GOR kodas"/>
-                            <TextBlock Style="{StaticResource LabelText}" Text="Įvesk GOR kodą"/>
+                <StackPanel Margin="0,0,50,0">
 
-                            <TextBox x:Name="textBoxGorCode"
-                                     Style="{StaticResource ReadableTextBox}"
-                                     KeyDown="textBoxGorCode_KeyDown"/>
+                    <Grid 
+                          SnapsToDevicePixels="True"
+                          UseLayoutRounding="True"
+                          Visibility="Collapsed">
+                        <Border Style="{StaticResource CardShadowStyle}"/>
+                        <Border Style="{StaticResource CardSurfaceStyle}" Margin="0">
+                            <StackPanel x:Name="stackGorCode">
+                                <TextBlock Style="{StaticResource SectionTitle}" Text="GOR kodas"/>
+                                <TextBlock Style="{StaticResource LabelText}" Text="Įvesk GOR kodą"/>
 
-                            <TextBlock x:Name="textBlockGorCodeError"
-                                       Style="{StaticResource ErrorText}"/>
-                        </StackPanel>
-                    </Border>
-                </Grid>
+                                <TextBox x:Name="textBoxGorCode"
+                                         Style="{StaticResource ReadableTextBox}"
+                                         KeyDown="textBoxGorCode_KeyDown"/>
 
-                <Grid Margin="0,0,0,12" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                    <Border Style="{StaticResource CardShadowStyle}"/>
-                    <Border Style="{StaticResource CardSurfaceStyle}" Margin="0">
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource SectionTitle}" Text="Operacijos informacija"/>
-
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,12,10">
-                                    <TextBlock Style="{StaticResource LabelText}" Text="Operacijos kodas"/>
-                                    <TextBox x:Name="textBoxOperationCode"
-                                             Style="{StaticResource ReadableTextBoxReadonly}"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,12,10">
-                                    <TextBlock Style="{StaticResource LabelText}" Text="Operacijos aprašymas"/>
-                                    <TextBox x:Name="textBoxOperationDiscription"
-                                             Style="{StaticResource ReadableTextBoxReadonly}"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,10">
-                                    <TextBlock Style="{StaticResource LabelText}" Text="Privalomos operacijos"/>
-                                    <TextBox x:Name="textBoxMandatoryOperations"
-                                             Style="{StaticResource ReadableTextBoxReadonly}"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,10">
-                                    <TextBlock Style="{StaticResource LabelText}" Text="Kartojama"/>
-                                    <CheckBox x:Name="checkBoxRepeatable"
-                                              Style="{StaticResource ReadableCheckBox}"
-                                              Content="Repeatable"
-                                              IsEnabled="False"/>
-                                </StackPanel>
-                            </Grid>
-
-                            <StackPanel x:Name="stackMain" Margin="0,4,0,0"/>
-                        </StackPanel>
-                    </Border>
-                </Grid>
-
-                <Grid x:Name="boarderScan" Margin="0,0,0,12" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                    <Border Style="{StaticResource CardShadowStyle}"/>
-                    <Border Style="{StaticResource CardSurfaceStyle}" Margin="0">
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource SectionTitle}" Text="Skenavimas"/>
-                            <TextBlock Style="{StaticResource LabelText}" Text="Skenuok gaminio custom serijinį numerį"/>
-
-                            <TextBox x:Name="textBoxInput"
-                                     Style="{StaticResource ReadableTextBox}"
-                                     KeyDown="textBoxInput_KeyDown"/>
-
-                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                <RadioButton x:Name="radioGood"
-                                             Content="Geras"
-                                             GroupName="ScanResult"
-                                             Style="{StaticResource RoundedRadioButton}"/>
-
-                                <RadioButton x:Name="radioBad"
-                                             Content="Blogas"
-                                             GroupName="ScanResult"
-                                             Style="{StaticResource RoundedRadioButton}"
-                                             Margin="10,0,0,0"/>
+                                <TextBlock x:Name="textBlockGorCodeError"
+                                           Style="{StaticResource ErrorText}"/>
                             </StackPanel>
+                        </Border>
+                    </Grid>
 
-                            <TextBlock x:Name="textBlockCompletedCount"
-                                       Style="{StaticResource CountText}"
-                                       Text="Atlikta operaciju: 0"/>
+                    <Grid Margin="0,0,0,12" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                        <Border Style="{StaticResource CardShadowStyle}"/>
+                        <Border Style="{StaticResource CardSurfaceStyle}" Margin="0">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource SectionTitle}" Text="Operacijos informacija"/>
 
-                            <TextBlock x:Name="textBlockScanError"
-                                       Style="{StaticResource ErrorText}"/>
-                        </StackPanel>
-                    </Border>
-                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
 
-                <Grid Margin="0,0,0,12" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                    <Border Style="{StaticResource CardShadowStyle}"/>
-                    <Border Style="{StaticResource CardSurfaceStyle}" Margin="0">
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource SectionTitle}" Text="Skenavimo rezultatai"/>
+                                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,12,10">
+                                        <TextBlock Style="{StaticResource LabelText}" Text="Operacijos kodas"/>
+                                        <TextBox x:Name="textBoxOperationCode"
+                                                 Style="{StaticResource ReadableTextBoxReadonly}"/>
+                                    </StackPanel>
 
-                            <DataGrid x:Name="scanResultsGrid"
-                                      Style="{StaticResource ReadableDataGrid}"
-                                      MinHeight="240"
-                                      MaxHeight="420"
-                                      Margin="0,6,0,0">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Skenuoti duomenys"
-                                                        Binding="{Binding ScannedData}"
-                                                        Width="2*"/>
+                                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,12,10">
+                                        <TextBlock Style="{StaticResource LabelText}" Text="Operacijos aprašymas"/>
+                                        <TextBox x:Name="textBoxOperationDiscription"
+                                                 Style="{StaticResource ReadableTextBoxReadonly}"/>
+                                    </StackPanel>
 
-                                    <DataGridTextColumn Header="FindProductsAsync"
-                                                        Binding="{Binding FindProductsStatus}"
-                                                        Width="2*"/>
+                                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,10">
+                                        <TextBlock Style="{StaticResource LabelText}" Text="Privalomos operacijos"/>
+                                        <TextBox x:Name="textBoxMandatoryOperations"
+                                                 Style="{StaticResource ReadableTextBoxReadonly}"/>
+                                    </StackPanel>
 
-                                    <DataGridTextColumn Header="CreateActionByOperationalCodeAsync"
-                                                        Binding="{Binding CreateActionStatus}"
-                                                        Width="2*"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </StackPanel>
-                    </Border>
-                </Grid>
+                                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,10">
+                                        <TextBlock Style="{StaticResource LabelText}" Text="Kartojama"/>
+                                        <CheckBox x:Name="checkBoxRepeatable"
+                                                  Style="{StaticResource ReadableCheckBox}"
+                                                  Content="Repeatable"
+                                                  IsEnabled="False"/>
+                                    </StackPanel>
+                                </Grid>
 
+                                <StackPanel x:Name="stackMain" Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <Grid x:Name="boarderScan" Margin="0,0,0,12" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                        <Border Style="{StaticResource CardShadowStyle}"/>
+                        <Border Style="{StaticResource CardSurfaceStyle}" Margin="0">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource SectionTitle}" Text="Skenavimas"/>
+                                <TextBlock Style="{StaticResource LabelText}" Text="Skenuok gaminio custom serijinį numerį"/>
+
+                                <TextBox x:Name="textBoxInput"
+                                         Style="{StaticResource ReadableTextBox}"
+                                         KeyDown="textBoxInput_KeyDown"/>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                    <RadioButton x:Name="radioGood"
+                                                 Content="Geras"
+                                                 GroupName="ScanResult"
+                                                 Style="{StaticResource RoundedRadioButton}"/>
+
+                                    <RadioButton x:Name="radioBad"
+                                                 Content="Blogas"
+                                                 GroupName="ScanResult"
+                                                 Style="{StaticResource RoundedRadioButton}"
+                                                 Margin="10,0,0,0"/>
+                                </StackPanel>
+
+                                <TextBlock x:Name="textBlockCompletedCount"
+                                           Style="{StaticResource CountText}"
+                                           Text="Atlikta operaciju: 0"/>
+
+                                <TextBlock x:Name="textBlockScanError"
+                                           Style="{StaticResource ErrorText}"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                
             </StackPanel>
-        </ScrollViewer>
+            <Grid Grid.Column="1" Margin="0,0,0,12" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                <Border Style="{StaticResource CardShadowStyle}"/>
+                <Border Style="{StaticResource CardSurfaceStyle}" Margin="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                       Style="{StaticResource SectionTitle}"
+                       Text="Skenavimo rezultatai"/>
+
+                        <DataGrid Grid.Row="1"
+                      x:Name="scanResultsGrid"
+                      Style="{StaticResource ReadableDataGrid}"
+                      Margin="0,6,0,0">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Skenuoti duomenys"
+                                        Binding="{Binding ScannedData}"
+                                        Width="2*"/>
+
+                                <DataGridTextColumn Header="FindProductsAsync"
+                    Binding="{Binding FindProductsStatus}"
+                    Width="2*"
+                    ElementStyle="{StaticResource FindProductsStatusTextStyle}"/>
+
+                                <DataGridTextColumn Header="CreateActionByOperationalCodeAsync"
+                    Binding="{Binding CreateActionStatus}"
+                    Width="2*"
+                    ElementStyle="{StaticResource CreateActionStatusTextStyle}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
